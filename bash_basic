@@ -1,0 +1,33 @@
+#/bin/bash
+
+result=0
+COMPARISON=MD5_COMPARISON
+refc_plane_md5=test
+golden_plane_md5=test
+
+
+: <<'END_COMMENT' #start of annotation
+
+#SYS variables
+$LINENO
+
+#for statatement by integer
+idx=0
+loop_cnt=2
+for((idx=0; idx<loop_cnt; idx++)) do
+	echo "${LINENO}"
+done
+
+
+#Debugging Message format
+_ERR_HDR_FMT="%.23s %s[%s]: "
+_ERR_MSG_FMT="${_ERR_HDR_FMT}%s\n"
+function err_msg {
+	printf "$_ERR_MSG_FMT" $(date +%F.%T.%N) ${BASH_SOURCE[1]##*/} ${BASH_LINENO[0]} "${@}"
+}
+err_msg "test"
+
+END_COMMENT
+
+
+echo "Finished"
