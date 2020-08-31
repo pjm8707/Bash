@@ -15,8 +15,8 @@ $LINENO
 idx=0
 loop_cnt=1
 for((idx=0; idx<loop_cnt; idx++)) do
-	echo "${LINENO}"
-	echo "${BASH_SOURCE}"
+    echo "${LINENO}"
+    echo "${BASH_SOURCE}"
 done
 
 
@@ -24,9 +24,28 @@ done
 _ERR_HDR_FMT="%.23s %s[%s]: "
 _ERR_MSG_FMT="${_ERR_HDR_FMT}%s\n"
 function err_msg {
-	printf "$_ERR_MSG_FMT" $(date +%F.%T.%N) ${BASH_SOURCE[1]##*/} ${BASH_LINENO[0]} "${@}"
+    printf "$_ERR_MSG_FMT" $(date +%F.%T.%N) ${BASH_SOURCE[1]##*/} ${BASH_LINENO[0]} "${@}"
 }
 err_msg "test"
+
+#read line by commend
+idx=0
+ps -a | grep multi_instance_ | while read line
+do
+    echo $line
+    pid=$(echo "$line" | cut -d' ' -f1)
+    echo "PID : $pid"
+    kill_cmd="kill -9 $pid"
+    echo "[$idx] $kill_cmd"
+    $kill_cmd || echo ignore_error
+    sleep 10
+    idx=$((idx+1))
+done
+
+#cut
+echo "test_2566x144" | cut -f 1 -d'_' --> test
+echo "test_2566x144" | cut -f 2 -d'_' --> 2566x144
+attr=$(echo $line | cut -d'=' -f1)
 
 END_COMMENT
 
