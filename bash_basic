@@ -47,6 +47,18 @@ echo "test_2566x144" | cut -f 1 -d'_' --> test
 echo "test_2566x144" | cut -f 2 -d'_' --> 2566x144
 attr=$(echo $line | cut -d'=' -f1)
 
+#background exe / multi process
+idx=0
+cmd="./a.out"
+for(( idx=0; idx<10; idx++ ))
+do
+    echo "$cmd"
+    $cmd &
+    sleep 3
+done
+echo "finished"
+
+
 END_COMMENT
 
 echo "Finished"
