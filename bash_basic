@@ -68,6 +68,7 @@ function get_random {
     val=$(($start + $val1%$size))
     echo "$val"
 }
+g_test=$(get_random 1 2)
 
 END_COMMENT
 
