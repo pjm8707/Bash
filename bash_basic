@@ -58,6 +58,16 @@ do
 done
 echo "finished"
 
+#random value
+function get_random {
+    start=$1
+    end=$2
+    size=$(($end - $start + 1))
+    val2=$RANDOM
+    val1=$(($val2 % size))
+    val=$(($start + $val1%$size))
+    echo "$val"
+}
 
 END_COMMENT
 
