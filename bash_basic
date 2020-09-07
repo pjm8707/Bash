@@ -70,6 +70,27 @@ function get_random {
 }
 g_test=$(get_random 1 2)
 
+#change file name and contents
+#/bin/bash
+idx=0
+changed_file_name=""
+ret=0
+ls | while read line
+do
+    echo $line
+    changed_file_name=""
+    ret=0
+    echo "$line" | grep concealment || ret=1
+    echo "$ret"
+    if [ $ret -eq 0 ]; then
+        changed_file_name=${line/pic_level/slice_level}
+        echo $changed_file_name
+        sed -i 's/pic_level/slice_level/g' $line
+        mv $line $changed_file_name
+    fi
+    idx=$((idx+1))
+done
+
 END_COMMENT
 
 echo "Finished"
