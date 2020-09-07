@@ -91,6 +91,10 @@ do
     idx=$((idx+1))
 done
 
+#grep
+grep -rin 'sorry' frost.txt # And sorry I could not travel both
+grep -rinl 'sorry' # frost.txt
+
 END_COMMENT
 
 echo "Finished"
