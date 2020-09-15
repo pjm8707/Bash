@@ -95,6 +95,17 @@ done
 grep -rin 'sorry' frost.txt # And sorry I could not travel both
 grep -rinl 'sorry' # frost.txt
 
+#head (head는 파일의 앞부분부터 확인)
+test_str=$(head -c 3 frost.txt) # 3 characters,  two
+test_row=$(head -n 2 frost.txt) # two rows
+
+#tail (파일의 뒷부분부터 확인)
+tail forst.txt # 마지막 부터 10행 출력
+tail -n 20 forst.txt # 마지막 부터 20행 출력
+tail -c 200 forst.txt # 마지막 부터 200 byte 출력
+tail -f /var/log/messages # 파일 변경내용 출력
+tail -f -s 1 -pid=3219 /var/log/messages # 3219 process가 종료 될 때까지 1초 간격으로 파일 변경내용 출력
+
 END_COMMENT
 
 echo "Finished"
