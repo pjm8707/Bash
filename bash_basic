@@ -71,7 +71,6 @@ function get_random {
 g_test=$(get_random 1 2)
 
 #change file name and contents
-#/bin/bash
 idx=0
 changed_file_name=""
 ret=0
@@ -90,6 +89,30 @@ do
     fi
     idx=$((idx+1))
 done
+
+
+#download files with ftp
+function get_data_with_ftp {
+local HOST="xxx.xxx.xxx.xxx"
+local USER="ian"
+local PASSWD="123456789"
+local stream=$1
+local path=$2
+local codec=$3
+
+path=${path/"//"/"/"}
+path=${path/"/nstream/qctool"/"/data/new_server/"}
+
+echo "path : $path"
+
+ftp -inv $HOST <<EOF
+user $USER $PASSWD
+bin
+cd $path
+get $stream
+bye
+EOF
+}
 
 END_COMMENT
 
