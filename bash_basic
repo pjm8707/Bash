@@ -19,6 +19,14 @@ for((idx=0; idx<loop_cnt; idx++)) do
     echo "${BASH_SOURCE}"
 done
 
+#for statement by array
+codec_list=(avc hevc vp9 avs2 av1)
+for val in ${codec_list[@]};do
+    echo "$val"
+done
+for ((idx=0; idx<${#codec_list[@]}; idx++)); do
+    echo "value[$idx]: = ${codec_list[$idx]}"
+done
 
 #Debugging Message format
 _ERR_HDR_FMT="%.23s %s[%s]: "
