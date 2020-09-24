@@ -122,6 +122,10 @@ bye
 EOF
 }
 
+#get file name & base dir
+file_name=$(basename $file_path)
+dir_path=$(dirname $file_path)
+
 END_COMMENT
 
 echo "Finished"
