@@ -126,6 +126,15 @@ EOF
 file_name=$(basename $file_path)
 dir_path=$(dirname $file_path)
 
+#if statement
+if [ ! -d "/etc/nginx/sites-available/" ];then
+    mkdir /etc/nginx/sites-available/
+fi
+
+if [ ! -d "/etc/nginx/sites-available/test.txt" ];then
+    touch /etc/nginx/sites-available/test.txt
+fi
+
 END_COMMENT
 
 echo "Finished"
