@@ -114,6 +114,14 @@ bye
 EOF
 }
 
+#split a file
+split -l 1000 file_name out_file_prefix #put NUMBER lines per output file
+split -b 5000 file_name out_file_prefix #put SIZE bytes per output file
+split -b -d 5000 file_name out_file_prefix #out_file_prefix_00 01 02...
+
+#md5
+md5sum test.txt #e026b571b48196d084d1d1106dd4268f
+
 END_COMMENT
 
 echo "Finished"
