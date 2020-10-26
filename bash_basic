@@ -35,6 +35,22 @@ function err_msg {
 }
 err_msg "test"
 
+#switch
+case $COUNTRY in
+  Lithuania)
+    echo -n "Lithuanian"
+    ;;
+  Romania | Moldova)
+    echo -n "Romanian"
+    ;;
+  Italy | "San Marino" | Switzerland | "Vatican City")
+    echo -n "Italian"
+    ;;
+  *)
+    echo -n "unknown"
+    ;;
+esac
+
 #read line by commend
 idx=0
 ps -a | grep multi_instance_ | while read line
