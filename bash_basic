@@ -70,6 +70,20 @@ echo "test_2566x144" | cut -f 1 -d'_' --> test
 echo "test_2566x144" | cut -f 2 -d'_' --> 2566x144
 attr=$(echo $line | cut -d'=' -f1)
 
+#display_info.txt
+#picture_num : 00000000	monochrome : 00000000	bitdepth_y : 00000010	bitdepth_c : 00000010	width_dis : 00000272	height_dis : 00000416	log2_ctb_size : 00000006	c10v2 : 00000001	codec_std : 00000000
+
+disp_width=$(head -n 1 display_info.txt | cut -f5 -d$'\t')
+disp_height=$(head -n 1 display_info.txt | cut -f6 -d$'\t')
+echo "${disp_width}"
+echo "${disp_height}"
+disp_width=$(echo $disp_width | cut -f2 -d':' | tr -d ' ')
+disp_height=$(echo $disp_height | cut -f2 -d':' | tr -d ' ')
+echo "$((10#$disp_width))"
+echo "$((10#$disp_height))"
+disp_width=$((10#$disp_width)) #000123 --> 123
+disp_height=$((10#$disp_height))
+
 #background exe / multi process
 idx=0
 cmd="./a.out"
