@@ -132,6 +132,9 @@ grep -rcin 'sorry' frost.txt # And sorry I could not travel both
 grep -rinl 'sorry' # frost.txt
 grep -E 'T.?o' frost.txt #Two reads diver... , To where it ...
 
+#grep & cpoy
+cp `grep -l "string" *` DST_DIR/
+
 #head (head는 파일의 앞부분부터 확인)
 test_str=$(head -c 3 frost.txt) # 3 characters,  two
 test_row=$(head -n 2 frost.txt) # two rows
@@ -203,6 +206,9 @@ split -b -d 5000 file_name out_file_prefix #out_file_prefix_00 01 02...
 
 #md5
 md5sum test.txt #e026b571b48196d084d1d1106dd4268f
+
+#find & copy
+find . -name NAME.EXT -exec cp -rfp {} /DST_DIR \;
 
 END_COMMENT
 
