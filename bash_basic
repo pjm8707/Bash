@@ -127,6 +127,63 @@ do
     idx=$((idx+1))
 done
 
+#change file contents by sed
+function check_res_changed_stream {
+    local width=()
+    local height=()
+    local luma_bitdepth=()
+    local chroma_bitdepth=()
+    local monochrome=()
+    local line=1
+    local test_num=0
+
+    if [[ $g_frame_num == *"-n"* ]] ; then
+        test_num=$(echo $g_frame_num | cut -d' ' -f2) 
+    fi
+
+    g_res_changed=0
+    g_bit_depth_changed=0
+    g_is_monochrome=0
+    for ((idx=0; idx<$test_num; idx++));do
+        width_line=$(sed -n $line,1p display_info.txt | cut -f5 -d$'\t')
+        height_line=$(sed -n $line,1p display_info.txt | cut -f6 -d$'\t')
+        luma_bitdepth_line=$(sed -n $line,1p display_info.txt | cut -f3 -d$'\t')
+        chroma_bitdepth_line=$(sed -n $line,1p display_info.txt | cut -f4 -d$'\t')
+        monochrome_line=$(sed -n $line,1p display_info.txt | cut -f2 -d$'\t')
+
+        width[$idx]=$(echo $width_line | cut -f2 -d':' | tr -d ' ')
+        height[$idx]=$(echo $height_line | cut -f2 -d':' | tr -d ' ')
+        luma_bitdepth[$idx]=$(echo $luma_bitdepth_line | cut -f2 -d':' | tr -d ' ')
+        chroma_bitdepth[$idx]=$(echo $chroma_bitdepth_line | cut -f2 -d':' | tr -d ' ')
+        monochrome[$idx]=$(echo $monochrome_line | cut -f2 -d':' | tr -d ' ')
+
+        width[$idx]=$((10#${width[$idx]}))
+        height[$idx]=$((10#${height[$idx]}))
+        luma_bitdepth[$idx]=$((10#${luma_bitdepth[$idx]}))
+        chroma_bitdepth[$idx]=$((10#${chroma_bitdepth[$idx]}))
+        monochrome[$idx]=$((10#${monochrome[$idx]}))
+        echo "parse info : width : ${width[$idx]} height : ${height[$idx]} luma depth : ${luma_bitdepth[$idx]} chroma depth : ${chroma_bitdepth[$idx]} monochrome : ${monochrome[$idx]}"
+        line=$(($line+1))
+
+        if (( ${width[$idx]} > 0 )) && (( ${height[$idx]} ));then
+            if (( $idx > 0 )); then
+                if (( ${width[0]} != ${width[$idx]} )) || (( ${height[0]} != ${height[$idx]} ));then
+                    g_res_changed=1
+                fi
+                if (( ${luma_bitdepth[0]} != ${luma_bitdepth[$idx]} )) || (( ${chroma_bitdepth[0]} != ${chroma_bitdepth[$idx]} ));then
+                    g_bit_depth_changed=1
+                fi
+            fi
+        fi
+        if (( $monochrome == 1 )); then
+            g_is_monochrome=1
+        fi
+    done
+
+    echo "g_res_changed : $g_res_changed"
+    echo "g_bit_depth_changed : $g_bit_depth_changed"
+}
+
 #grep
 grep -rcin 'sorry' frost.txt # And sorry I could not travel both
 grep -rinl 'sorry' # frost.txt
