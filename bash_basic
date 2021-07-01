@@ -184,6 +184,9 @@ function check_res_changed_stream {
     echo "g_bit_depth_changed : $g_bit_depth_changed"
 }
 
+#replace specific line text by sed
+sed -i "4s/.yuv/_test.yuv/g" test.txt
+
 #grep
 grep -rcin 'sorry' frost.txt # And sorry I could not travel both
 grep -rinl 'sorry' # frost.txt
