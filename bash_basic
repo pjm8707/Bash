@@ -281,6 +281,12 @@ md5sum test.txt #e026b571b48196d084d1d1106dd4268f
 #find & copy
 find . -name NAME.EXT -exec cp -rfp {} /DST_DIR \;
 
+#find & delete
+delete files order than 5 days
+find 폴더 -name "file_name" -mtime +4 -delete
+find 폴더 -name "file_name" -mtime +4 -exec rm -f {} \;
+find 폴더 -name "file_name" -mtime +4 | xargs rm -f
+
 END_COMMENT
 
 echo "Finished"
