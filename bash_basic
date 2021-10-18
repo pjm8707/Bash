@@ -53,7 +53,7 @@ esac
 
 #read line by commend
 idx=0
-ps -a | grep multi_instance_ | while read line
+ps -a | grep multi_instance_ | while read -r line
 do
     echo $line
     pid=$(echo "$line" | cut -d' ' -f1)
