@@ -191,6 +191,7 @@ sed -i "4s/.yuv/_test.yuv/g" test.txt
 grep -rcin 'sorry' frost.txt # And sorry I could not travel both
 grep -rinl 'sorry' # frost.txt
 grep -E 'T.?o' frost.txt #Two reads diver... , To where it ...
+egrep '(\[.[0-9]+/.[0-9]+\]|ERR_REASON|ERR_POS)' test_raw_data.txt
 
 #grep & cpoy
 cp `grep -l "string" *` DST_DIR/
