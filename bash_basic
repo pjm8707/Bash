@@ -306,6 +306,13 @@ function test_func_1
 }
 test_func_1 1 2 3
 
+#if and ls
+if ls | grep '.*.sh' > /dev/null; then
+    echo "detect script"
+else
+    echo "no script"
+fi
+
 END_COMMENT
 
 echo "Finished"
