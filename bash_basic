@@ -292,6 +292,20 @@ find 폴더 -name "file_name" -mtime +4 | xargs rm -f
 du -h --max-depth=1 | sort -sh
 df
 
+#eval (This command is then read and executed by the shell)
+function test_func_1
+{
+    echo "$#"
+    local arg_num=$(($#+1))
+    local arg_list=()
+    for ((idx=0; idx<arg_num; idx++))
+    do
+        arg_list[$idx]=$(eval echo \$${idx})
+        echo "${arg_list[$idx]}"
+    done
+}
+test_func_1 1 2 3
+
 END_COMMENT
 
 echo "Finished"
