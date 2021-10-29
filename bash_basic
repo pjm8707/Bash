@@ -313,6 +313,39 @@ else
     echo "no script"
 fi
 
+#enum
+function i_enum()
+{
+    local A=0
+    local i=0
+
+    A=${@##*\{}
+    A=${A%\}*}
+    A=${A//,/}
+    Array=(${A})
+    eval "${Array[0]}=()"
+    for ((i=1;i<${#Array[@]};i++)) ; do
+        eval "${Array[$i]}=$(($i-1))"
+        eval "${Array[0]}+=($(($i-1)))"
+    done
+}
+
+function h_enum()
+{
+    local A=0
+    local i=0
+
+    A=${@##*\{}
+    A=${A%\}*}
+    A=${A//,/ }
+    Array=(${A})
+    eval "${Array[0]}=()"
+    for ((i=1;i<${#Array[@]};i++)) ; do
+        eval "${Array[$i]}=$((1<<($i-1)))"
+        eval "${Array[0]}+=($((1<<($i-1))))"
+    done
+}
+
 END_COMMENT
 
 echo "Finished"
