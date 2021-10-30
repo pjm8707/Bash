@@ -1,5 +1,7 @@
 #/bin/bash
 
+#https://www.gnu.org/savannah-checkouts/gnu/bash/manual/bash.html
+
 result=0
 COMPARISON=MD5_COMPARISON
 refc_plane_md5=test
