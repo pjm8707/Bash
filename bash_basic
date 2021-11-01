@@ -9,6 +9,16 @@ golden_plane_md5=test
 
 : <<'END_COMMENT' #start of annotation
 
+#source
+
+dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
+echo "dir : $dir"
+source "${dir}/source_1/test_2.sh"
+
+dir="$(cd "$(dirname ${BASH_SOURCE[0]})" && pwd -P)"
+echo "test2.sh"
+source ${dir}/source_2/test_3.sh
+
 #SYS variables
 $LINENO
 
