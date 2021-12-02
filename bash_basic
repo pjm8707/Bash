@@ -39,6 +39,46 @@ for ((idx=0; idx<${#codec_list[@]}; idx++)); do
     echo "value[$idx]: = ${codec_list[$idx]}"
 done
 
+#associative array
+
+test_str="16 ../test/temp.cfg 0 0 1 -99"
+multi_cmd_keys=(
+    STD_IDX
+    CFG_PATH
+    IS_ENC
+    IS_10B
+    RESERVED
+    SRC_FMT
+    TEST
+)
+
+declare -A cmd_val_arr
+
+OLD_IFS=$IFS
+for key in "${multi_cmd_keys[@]}";
+do
+    echo "key : $key"
+    cmd_val_arr[${key}]="None"
+done
+
+IFS=" "
+idx=0
+for val in ${test_str[@]};
+do
+    cmd_val_arr[${multi_cmd_keys[$idx]}]=${val}
+    ((idx++))
+done
+
+echo "${cmd_val_arr[@]}"
+echo ""
+
+for key in "${!cmd_val_arr[@]}";
+do
+    echo "key : $key val : ${cmd_val_arr[${key}]}"
+done
+
+IFS=$OLD_IFS
+
 #Debugging Message format
 _ERR_HDR_FMT="%.23s %s[%s]: "
 _ERR_MSG_FMT="${_ERR_HDR_FMT}%s\n"
