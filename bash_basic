@@ -402,6 +402,9 @@ function h_enum()
     done
 }
 
+#make zero padding file
+echo -en "\x00" >> zero_byte.bin
+
 END_COMMENT
 
 echo "Finished"
