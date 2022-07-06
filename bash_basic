@@ -239,6 +239,9 @@ function check_res_changed_stream {
 #replace specific line text by sed
 sed -i "4s/.yuv/_test.yuv/g" test.txt
 
+#add text to specific line
+sed -i '8 i\    PVRIC    1' *.all
+
 #grep
 grep -rcin 'sorry' frost.txt # And sorry I could not travel both
 grep -rinl 'sorry' # frost.txt
